@@ -70,7 +70,7 @@ const SingleListPage = (props) => {
           <div>{item.nickname}</div>
           <div>Actor Name</div>
           <div>{item.portrayed}</div>
-          <div>Seasons</div>
+          <div>{appearance}</div>
           <div>{appearance && appearance.map((i) => <span>{i}, </span>)}</div>
         </div>
       </div>

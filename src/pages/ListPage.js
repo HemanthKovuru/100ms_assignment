@@ -3,7 +3,8 @@ import ListCard from "../components/ListCard";
 import axios from "axios";
 import "./../scss/ListPage.scss";
 import Pagination from "../components/Pagination";
-
+import { Redirect } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 const ListPage = () => {
   // 1]. initialize data
   const [list, setList] = useState([]);
@@ -12,14 +13,24 @@ const ListPage = () => {
   const [perPage, setPerPage] = useState(10);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
+  const [error, setError] = useState(false);
 
   // 2]. fetch results
   const fetchList = async () => {
     setLoading(true);
+
     const items = await axios.get(
       `https://www.breakingbadapi.com/api/characters`
     );
-    setList(items.data);
+
+    if (
+      items.data.length > 0 &&
+      items.config.url !== "https://www.breakingbadapi.com/api/characters"
+    ) {
+      setError(true);
+    } else {
+      setList(items.data);
+    }
     setLoading(false);
   };
 
@@ -31,6 +42,7 @@ const ListPage = () => {
 
   // 3.1]. search
   let filterItems = [...list];
+
   if (list && list.length > 0) {
     filterItems = filterItems.filter((item) => {
       let name = item.name.toLowerCase();
@@ -55,6 +67,15 @@ const ListPage = () => {
 
   if (loading) {
     return <div className='loading'>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className='error'>
+        Requesting page is not available Please come again after some time or
+        refresh the page
+      </div>
+    );
   }
 
   return (
