@@ -3,8 +3,7 @@ import ListCard from "../components/ListCard";
 import axios from "axios";
 import "./../scss/ListPage.scss";
 import Pagination from "../components/Pagination";
-import { Redirect } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+
 const ListPage = () => {
   // 1]. initialize data
   const [list, setList] = useState([]);
@@ -91,7 +90,7 @@ const ListPage = () => {
         <input
           className='search'
           type='text'
-          placeholder='search for your favourite actor'
+          placeholder='search for your favourite character'
           value={query}
           onChange={(evt) => setQuery(evt.target.value)}
         />

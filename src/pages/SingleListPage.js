@@ -10,7 +10,7 @@ const SingleListPage = (props) => {
   const [loading, setLoading] = useState(false);
   const base_url = "https://www.breakingbadapi.com/api";
 
-  // 2]. fetch function
+  // 2]. implement fetch functions
   const fetchItem = async () => {
     setLoading(true);
     const item = await axios.get(
@@ -29,7 +29,7 @@ const SingleListPage = (props) => {
     setQuotes(quotes.data);
   };
 
-  // 3]. call use effect with fetchitem
+  // 3]. call use effect with fetch functions
   useEffect(() => {
     fetchItem();
     fetchQuotes();
